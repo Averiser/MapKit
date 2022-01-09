@@ -12,6 +12,7 @@ import MapKit
 class MapViewController: UIViewController {
 
   @IBOutlet weak var mapView: MKMapView!
+  var place: InterestingPlace?
   
   @IBAction func changeMapType(_ sender: UISegmentedControl) {
     
@@ -27,11 +28,13 @@ class MapViewController: UIViewController {
   }
   override func viewDidLoad() {
         super.viewDidLoad()
-
-    let appleHQ = CLLocation(latitude: 37.334722, longitude: -122.008889)
-    let regionRadius: CLLocationDistance = 1000.0
-    let region = MKCoordinateRegion(center: appleHQ.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-    mapView.setRegion(region, animated: true)
+    
+    
+    if let place = place {
+      let regionRadius: CLLocationDistance = 1000.0
+      let region = MKCoordinateRegion(center: place.location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+      mapView.setRegion(region, animated: true)
+    }
     mapView.delegate = self
     }
 

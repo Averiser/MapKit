@@ -85,6 +85,14 @@ class ViewController: UIViewController {
     locationManager?.startUpdatingLocation()
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "MapSegue" {
+      guard let mapController = segue.destination as? MapViewController,
+            let selectedPlace = selectedPlace else { return }
+      mapController.place = selectedPlace
+    }
+  }
+  
   func loadPlaces() {
     
     guard let entries = loadPlist() else { fatalError("Unable to load data") }
@@ -187,7 +195,7 @@ extension ViewController: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
     currentLocation = locations.first
-    print(currentLocation)
+//    print(currentLocation)
     
     
 //    if currentLocation == nil {
