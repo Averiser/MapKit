@@ -27,6 +27,9 @@
                                 <rect key="frame" x="19.999999999999996" y="665" width="60.666666666666657" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Close"/>
+                                <connections>
+                                    <action selector="close:" destination="Jws-Ya-aQk" eventType="touchUpInside" id="XHE-UG-3bm"/>
+                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QXg-iV-qxw">
                                 <rect key="frame" x="131.66666666666666" y="665" width="150.99999999999997" height="32"/>
@@ -34,6 +37,9 @@
                                     <segment title="Standard"/>
                                     <segment title="Satellite"/>
                                 </segments>
+                                <connections>
+                                    <action selector="changeMapType:" destination="Jws-Ya-aQk" eventType="valueChanged" id="ihO-ZY-41a"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -48,6 +54,9 @@
                             <constraint firstAttribute="trailing" secondItem="Gg4-zC-EIH" secondAttribute="trailing" id="lB5-e9-SXm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="Gg4-zC-EIH" id="xvB-Tk-7ll"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CiP-Xd-xoS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
