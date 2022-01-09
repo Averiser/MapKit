@@ -13,6 +13,7 @@ class MapViewController: UIViewController {
 
   @IBOutlet weak var mapView: MKMapView!
   var place: InterestingPlace?
+  var places: [InterestingPlace] = []
   
   @IBAction func changeMapType(_ sender: UISegmentedControl) {
     
@@ -35,13 +36,30 @@ class MapViewController: UIViewController {
       let region = MKCoordinateRegion(center: place.location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
       mapView.setRegion(region, animated: true)
     }
+    mapView.addAnnotations(places)
     mapView.delegate = self
+    
     }
 
 }
 
 extension MapViewController: MKMapViewDelegate {
-  func mapViewWillStartRenderingMap(_ mapView: MKMapView) {
-    print("rendering ...")
+  
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    
+    if annotation is MKUserLocation {
+      return nil
+    }
+    
+    var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "InterestingPlace") as? MKMarkerAnnotationView
+    if annotationView == nil {
+      annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "InterestingPlace")
+    } else {
+      annotationView?.annotation = annotation
+    }
+    annotationView?.glyphText = "👀"
+    annotationView?.markerTintColor = UIColor(displayP3Red: 0.082, green: 0.518, blue: 0.263, alpha: 1.0)
+    
+    return annotationView
   }
 }

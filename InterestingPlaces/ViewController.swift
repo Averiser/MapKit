@@ -90,6 +90,7 @@ class ViewController: UIViewController {
       guard let mapController = segue.destination as? MapViewController,
             let selectedPlace = selectedPlace else { return }
       mapController.place = selectedPlace
+      mapController.places = places
     }
   }
   
