@@ -54,11 +54,20 @@ extension MapViewController: MKMapViewDelegate {
     var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "InterestingPlace") as? MKMarkerAnnotationView
     if annotationView == nil {
       annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "InterestingPlace")
+      annotationView?.canShowCallout = true
     } else {
       annotationView?.annotation = annotation
     }
     annotationView?.glyphText = "👀"
     annotationView?.markerTintColor = UIColor(displayP3Red: 0.082, green: 0.518, blue: 0.263, alpha: 1.0)
+    
+    if let placeAnnotation = annotation as? InterestingPlace {
+      
+      let image = UIImage(named: placeAnnotation.imageName)
+      let imageView = UIImageView(image: image)
+      annotationView?.detailCalloutAccessoryView = imageView
+      
+    }
     
     return annotationView
   }
